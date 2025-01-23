@@ -8,7 +8,6 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.facebook.react.bridge.Callback;
@@ -504,7 +503,7 @@ public class RNFreshchatSdk extends ReactContextBaseJavaModule {
     @ReactMethod
     public void dismissFreshchatViews() {
         Intent intent = new Intent("com.freshchat.consumer.sdk.actions.DismissFreshchatScreens");
-        LocalBroadcastManager.getInstance(getContext().getApplicationContext()).sendBroadcast(intent);
+        getContext().sendBroadcast(intent);
     }
 
     @ReactMethod
@@ -707,11 +706,11 @@ public class RNFreshchatSdk extends ReactContextBaseJavaModule {
     private void registerBroadcastReceiver(@NonNull FreshchatSDKBroadcastReceiver receiver, @NonNull String action) {
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(action);
-        LocalBroadcastManager.getInstance(getContext()).registerReceiver(receiver, intentFilter);
+        getContext().registerReceiver(receiver, intentFilter);
     }
 
     private void unregisterBroadcastReceiver(@NonNull FreshchatSDKBroadcastReceiver receiver) {
-        LocalBroadcastManager.getInstance(getContext()).unregisterReceiver(receiver);
+        getContext().unregisterReceiver(receiver);
     }
 
     private LinkHandler linkHandler = new LinkHandler() {
