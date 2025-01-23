@@ -1,0 +1,54 @@
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Node.js dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
+.env.*.local
+
+# Logs
+*.log
+*.tlog
+*.log.*
+
+# React Native cache and build files
+android/.gradle/
+android/app/build/
+android/build/
+ios/Pods/
+ios/build/
+android/local.properties
+
+# Xcode
+xcuserdata/
+*.xcworkspace
+*.pbxuser
+!default.pbxuser
+!default.xcworkspace
+*.swp
+*.xccheckout
+*.xcscmblueprint
+
+# Android
+*.iml
+*.hprof
+*.hprof.*
+
+# Testing
+coverage/
+test-output/
+jest-test-results.json
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Mac system files
+.DS_Store
+.idea/
