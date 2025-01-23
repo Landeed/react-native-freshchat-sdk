@@ -706,8 +706,21 @@ public class RNFreshchatSdk extends ReactContextBaseJavaModule {
     private void registerBroadcastReceiver(@NonNull FreshchatSDKBroadcastReceiver receiver, @NonNull String action) {
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(action);
-        getContext().registerReceiver(receiver, intentFilter);
+
+        Context context = getContext();
+        if (context != null) {
+            try {
+                // Explicitly mark as not exported as
+                // registerReceiver is running into a security exception due to restrictions imposed in Android 12+
+                context.registerReceiver(receiver, intentFilter, Context.RECEIVER_NOT_EXPORTED);
+            } catch (SecurityException e) {
+                Log.e("BroadcastReceiver", "SecurityException while registering receiver: " + e.getMessage());
+            }
+        } else {
+            Log.e("BroadcastReceiver", "Context is null. Cannot register receiver for action: " + action);
+        }
     }
+
 
     private void unregisterBroadcastReceiver(@NonNull FreshchatSDKBroadcastReceiver receiver) {
         getContext().unregisterReceiver(receiver);
