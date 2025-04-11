@@ -723,7 +723,12 @@ public class RNFreshchatSdk extends ReactContextBaseJavaModule {
 
 
     private void unregisterBroadcastReceiver(@NonNull FreshchatSDKBroadcastReceiver receiver) {
-        getContext().unregisterReceiver(receiver);
+        try {
+            getContext().unregisterReceiver(receiver);
+        } catch (IllegalArgumentException e) {
+            // receiver was not registered, no action needed
+            e.printStackTrace();
+        }
     }
 
     private LinkHandler linkHandler = new LinkHandler() {
